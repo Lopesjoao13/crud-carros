@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>Novo Carro</title>
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    </head>
+    <body class="flex flex-col p-8">
+
+    <div class="flex flex-row justify-between items-center">
+        <h1 class="text-2xl">🚗 Novo Carro</h1>
+    </div>
+    <div>
+        <form class="flex flex-col mt-8" th:action="@{/salvar}" method="post"
+              th:object="${carro}" enctype="multipart/form-data">
+            <label class="input">
+                <span class="label">Marca</span>
+                <input type="text" placeholder="Ex: Toyota" th:field="*{marca}" />
+            </label>
+            <label class="input mt-4">
+                <span class="label">Modelo</span>
+                <input type="text" placeholder="Ex: Corolla" th:field="*{modelo}" />
+            </label>
+            <label class="input mt-4">
+                <span class="label">Ano</span>
+                <input type="number" placeholder="Ex: 2023" th:field="*{ano}" />
+            </label>
+            <label class="input mt-4">
+                <span class="label">Cor</span>
+                <input type="text" placeholder="Ex: Prata" th:field="*{cor}" />
+            </label>
+
+            <!-- Upload de imagem -->
+            <div class="mt-4">
+                <span class="label mb-1 block">Imagem do Carro</span>
+                <input type="file" name="arquivo" accept="image/*"
+                       class="file-input file-input-bordered w-full"
+                       onchange="previewImagem(this)" />
+                <img id="preview" src="#" alt="Preview"
+                     class="mt-2 h-32 object-contain hidden rounded-lg border" />
+            </div>
+
+            <div class="flex flex-row mt-8">
+                <a href="/" class="btn btn-outline mr-4">Cancelar</a>
+                <button type="submit" class="btn btn-neutral">Salvar</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function previewImagem(input) {
+            const preview = document.getElementById('preview');
+            if (input.files && input.files[0]) {
+                preview.src = URL.createObjectURL(input.files[0]);
+                preview.classList.remove('hidden');
+            }
+        }
+    </script>
+
+    </body>
+</html>

@@ -1,0 +1,10 @@
+INSERT INTO carro (marca, modelo, ano, cor, imagem_url) VALUES ('Toyota', 'Corolla', 2022, 'Prata', 'https://cdn-icons-png.flaticon.com/512/3202/3202926.png');
+INSERT INTO carro (marca, modelo, ano, cor, imagem_url) VALUES ('Volkswagen', 'Golf GTI', 2023, 'Vermelho', 'https://cdn-icons-png.flaticon.com/512/3202/3202926.png');
+INSERT INTO carro (marca, modelo, ano, cor, imagem_url) VALUES ('Honda', 'Civic', 2021, 'Preto', 'https://cdn-icons-png.flaticon.com/512/3202/3202926.png');
+INSERT INTO carro (marca, modelo, ano, cor, imagem_url) VALUES ('Ford', 'Mustang', 2023, 'Azul', 'https://cdn-icons-png.flaticon.com/512/3202/3202926.png');
+INSERT INTO carro (marca, modelo, ano, cor, imagem_url) VALUES ('Chevrolet', 'Camaro', 2022, 'Amarelo', 'https://cdn-icons-png.flaticon.com/512/3202/3202926.png');
+INSERT INTO carro (marca, modelo, ano, cor, imagem_url) VALUES ('BMW', 'Serie 3', 2023, 'Branco', 'https://cdn-icons-png.flaticon.com/512/3202/3202926.png');
+INSERT INTO carro (marca, modelo, ano, cor, imagem_url) VALUES ('Mercedes-Benz', 'Classe C', 2022, 'Cinza', 'https://cdn-icons-png.flaticon.com/512/3202/3202926.png');
+INSERT INTO carro (marca, modelo, ano, cor, imagem_url) VALUES ('Fiat', 'Pulse', 2023, 'Verde', 'https://cdn-icons-png.flaticon.com/512/3202/3202926.png');
+INSERT INTO carro (marca, modelo, ano, cor, imagem_url) VALUES ('Hyundai', 'HB20', 2021, 'Vermelho', 'https://cdn-icons-png.flaticon.com/512/3202/3202926.png');
+INSERT INTO carro (marca, modelo, ano, cor, imagem_url) VALUES ('Jeep', 'Compass', 2023, 'Preto', 'https://cdn-icons-png.flaticon.com/512/3202/3202926.png');

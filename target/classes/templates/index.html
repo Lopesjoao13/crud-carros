@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Carros</title>
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    </head>
+    <body class="flex flex-col p-8">
+
+    <div>
+        <div class="flex flex-row justify-between items-center">
+            <h1 class="text-2xl">🚗 Carros</h1>
+            <a href="/novo" class="btn btn-neutral">
+                Novo Carro
+            </a>
+        </div>
+
+        <table class="table mt-4">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th></th>
+                <th>
+                    <a th:href="@{/(sort='marca', dir=${sort == 'marca' ? dirOposto : 'asc'})}">
+                        Marca
+                        <span th:if="${sort == 'marca'}" th:text="${dir == 'asc' ? '↑' : '↓'}"></span>
+                    </a>
+                </th>
+                <th>
+                    <a th:href="@{/(sort='modelo', dir=${sort == 'modelo' ? dirOposto : 'asc'})}">
+                        Modelo
+                        <span th:if="${sort == 'modelo'}" th:text="${dir == 'asc' ? '↑' : '↓'}"></span>
+                    </a>
+                </th>
+                <th>
+                    <a th:href="@{/(sort='ano', dir=${sort == 'ano' ? dirOposto : 'asc'})}">
+                        Ano
+                        <span th:if="${sort == 'ano'}" th:text="${dir == 'asc' ? '↑' : '↓'}"></span>
+                    </a>
+                </th>
+                <th>
+                    <a th:href="@{/(sort='cor', dir=${sort == 'cor' ? dirOposto : 'asc'})}">
+                        Cor
+                        <span th:if="${sort == 'cor'}" th:text="${dir == 'asc' ? '↑' : '↓'}"></span>
+                    </a>
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="c : ${lista}" class="hover:bg-base-300">
+                <td th:text="${c.id}">#</td>
+                <td>
+                    <div class="avatar">
+                        <div class="mask mask-squircle h-12 w-12">
+                            <img th:src="${c.imagemUrl}" alt="Imagem do carro" />
+                        </div>
+                    </div>
+                </td>
+                <td th:text="${c.marca}">{marca}</td>
+                <td th:text="${c.modelo}">{modelo}</td>
+                <td th:text="${c.ano}">{ano}</td>
+                <td th:text="${c.cor}">{cor}</td>
+                <td>
+                    <a th:href="@{/editar/{id}(id=${c.id})}" class="btn btn-outline">
+                        Editar
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    </body>
+</html>

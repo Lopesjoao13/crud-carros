@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <title>Editar Carro</title>
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    </head>
+    <body class="flex flex-col p-8">
+
+    <div class="flex flex-row justify-between items-center">
+        <h1 class="text-2xl">🚗 Editar Carro</h1>
+    </div>
+    <div>
+        <form class="flex flex-col mt-8" th:action="@{/salvar}" method="post"
+              th:object="${carro}" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" th:field="*{imagemUrl}" />
+
+            <label class="input">
+                <span class="label">Marca</span>
+                <input type="text" placeholder="Ex: Toyota" th:field="*{marca}" />
+            </label>
+            <label class="input mt-4">
+                <span class="label">Modelo</span>
+                <input type="text" placeholder="Ex: Corolla" th:field="*{modelo}" />
+            </label>
+            <label class="input mt-4">
+                <span class="label">Ano</span>
+                <input type="number" placeholder="Ex: 2023" th:field="*{ano}" />
+            </label>
+            <label class="input mt-4">
+                <span class="label">Cor</span>
+                <input type="text" placeholder="Ex: Prata" th:field="*{cor}" />
+            </label>
+
+            <!-- Upload de imagem -->
+            <div class="mt-4">
+                <span class="label mb-1 block">Imagem do Carro</span>
+                <!-- Mostra imagem atual se existir -->
+                <img th:if="${carro.imagemUrl != null and !#strings.isEmpty(carro.imagemUrl)}"
+                     th:src="${carro.imagemUrl}"
+                     id="preview"
+                     class="mb-2 h-32 object-contain rounded-lg border"
+                     alt="Imagem atual" />
+                <img th:unless="${carro.imagemUrl != null and !#strings.isEmpty(carro.imagemUrl)}"
+                     id="preview" src="#"
+                     class="mb-2 h-32 object-contain rounded-lg border hidden"
+                     alt="Preview" />
+                <input type="file" name="arquivo" accept="image/*"
+                       class="file-input file-input-bordered w-full"
+                       onchange="previewImagem(this)" />
+                <p class="text-sm text-gray-400 mt-1">Deixe em branco para manter a imagem atual</p>
+            </div>
+
+            <div class="flex flex-row mt-8">
+                <button type="button"
+                        class="btn btn-outline btn-error mr-4"
+                        onclick="document.getElementById('deleteModal').showModal()">
+                    Excluir
+                </button>
+                <a href="/" class="btn btn-outline mr-4">Cancelar</a>
+                <button type="submit" class="btn btn-neutral">Salvar</button>
+            </div>
+        </form>
+
+        <dialog id="deleteModal" class="modal">
+            <div class="modal-box">
+                <h3 class="text-lg font-bold">Confirmar exclusão</h3>
+                <p class="py-4">Tem certeza que deseja excluir este carro?</p>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <button class="btn">Cancelar</button>
+                    </form>
+                    <form th:action="@{/{id}(id=${carro.id})}" method="post">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="btn btn-error">Sim, excluir</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+    </div>
+
+    <script>
+        function previewImagem(input) {
+            const preview = document.getElementById('preview');
+            if (input.files && input.files[0]) {
+                preview.src = URL.createObjectURL(input.files[0]);
+                preview.classList.remove('hidden');
+            }
+        }
+    </script>
+
+    </body>
+</html>
