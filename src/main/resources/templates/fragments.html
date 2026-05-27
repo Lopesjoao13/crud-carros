@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div th:fragment="navbar" class="navbar bg-base-200 rounded-box mb-6 shadow-sm">
+    <div class="flex-1">
+        <a href="/" class="btn btn-ghost text-xl">🚗 Locadora Hub</a>
+    </div>
+    <div class="flex-none">
+        <ul class="menu menu-horizontal px-1 gap-2">
+            <li><a href="/" class="font-medium">Carros</a></li>
+            <li><a href="/clientes" class="font-medium">Clientes</a></li>
+            <li><a href="/alugueis" class="font-medium">Aluguéis</a></li>
+            <li><a href="/relatorio" class="btn btn-neutral text-white btn-sm px-4">📊 Gráficos</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

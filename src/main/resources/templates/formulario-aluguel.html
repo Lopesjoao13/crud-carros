@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Aluguel</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="flex flex-col p-8">
+<div th:replace="~{fragments :: navbar}"></div>
+
+<h1 class="text-2xl font-bold mb-6">🔑 Novo Aluguel de Veículo</h1>
+
+<form class="flex flex-col max-w-xl gap-4" th:action="@{/alugueis/salvar}" method="post" th:object="${aluguel}">
+
+    <!-- Selecionar Carro -->
+    <div class="form-control">
+        <label class="label"><span class="label-text font-semibold">Selecione o Carro:</span></label>
+        <select class="select select-bordered w-full" th:field="*{carro}" required>
+            <option value="" disabled selected>Escolha um veículo disponível...</option>
+            <option th:each="carro : ${listaCarros}"
+                    th:value="${carro.id}"
+                    th:text="${carro.marca + ' ' + carro.modelo + ' (' + carro.cor + ')'}"></option>
+        </select>
+    </div>
+
+    <!-- Selecionar Cliente -->
+    <div class="form-control">
+        <label class="label"><span class="label-text font-semibold">Selecione o Cliente:</span></label>
+        <select class="select select-bordered w-full" th:field="*{cliente}" required>
+            <option value="" disabled selected>Quem está alugando?</option>
+            <option th:each="cli : ${listaClientes}"
+                    th:value="${cli.id}"
+                    th:text="${cli.nome + ' - CPF: ' + cli.cpf}"></option>
+        </select>
+    </div>
+
+    <!-- Data do Aluguel -->
+    <div class="form-control">
+        <label class="label"><span class="label-text font-semibold">Data do Registro:</span></label>
+        <input type="date" class="input input-bordered w-full" th:field="*{dataAluguel}" required />
+    </div>
+
+    <!-- Valor Cobrado -->
+    <div class="form-control">
+        <label class="label"><span class="label-text font-semibold">Valor Total Cobrado (R$):</span></label>
+        <input type="number" step="0.01" class="input input-bordered w-full" placeholder="Ex: 250.00" th:field="*{valor}" required />
+    </div>
+
+    <div class="flex flex-row mt-6 gap-4">
+        <a href="/alugueis" class="btn btn-outline w-1/2">Cancelar</a>
+        <button type="submit" class="btn btn-neutral w-1/2">Concluir Aluguel</button>
+    </div>
+</form>
+</body>
+</html>

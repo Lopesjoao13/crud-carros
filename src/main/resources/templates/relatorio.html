@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard Geral</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="flex flex-col p-8 bg-base-100">
+<div th:replace="~{fragments :: navbar}"></div>
+
+<h1 class="text-3xl font-black mb-6 flex items-center gap-2">📊 Painel Estatístico</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+    <div class="card bg-base-200 p-6 shadow-sm border border-base-300">
+        <h2 class="card-title text-lg mb-4 text-neutral-content-dark">Faturamento Consolidado por Marca</h2>
+        <div class="w-full h-80 flex items-center justify-center">
+            <canvas id="graficoFaturamento"></canvas>
+        </div>
+    </div>
+
+    <div class="card bg-neutral text-neutral-content p-6 shadow-xl flex flex-col justify-between">
+        <div>
+            <h2 class="text-2xl font-bold mb-2 text-white">Insights Rápidos</h2>
+            <p class="text-sm opacity-80 mb-4">Os dados apresentados ao lado refletem a soma em tempo real de todas as transações de locação agrupadas pelos fabricantes automotivos.</p>
+            <div class="divider divider-neutral"></div>
+            <div class="stats bg-transparent text-white w-full grid grid-cols-1">
+                <div class="stat px-0">
+                    <div class="stat-title text-gray-300">Meta Mensal Estabelecida</div>
+                    <div class="stat-value text-success">R$ 15.000,00</div>
+                    <div class="stat-desc text-gray-400">Dados baseados nos aluguéis cadastrados</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    const marcasCarros = /*[[${labels}]]*/ [];
+    const faturamentoValores = /*[[${valores}]]*/ [];
+
+    const ctx = document.getElementById('graficoFaturamento').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: marcasCarros,
+            datasets: [{
+                label: 'Receita Total Gerada (R$)',
+                data: faturamentoValores,
+                backgroundColor: [
+                    '#4f46e5', '#06b6d4', '#10b981', '#f59e0b', '#ec4899'
+                ],
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(156, 163, 175, 0.1)' }
+                },
+                x: {
+                    grid: { display: false }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulário de Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="flex flex-col p-8">
+<div th:replace="~{fragments :: navbar}"></div>
+
+<h1 class="text-2xl font-bold mb-6">👤 Dados do Cliente</h1>
+
+<form class="flex flex-col max-w-xl gap-4" th:action="@{/clientes/salvar}" method="post" th:object="${cliente}">
+    <input type="hidden" th:field="*{id}" />
+
+    <label class="input input-bordered flex items-center gap-2">
+        <span class="w-20 text-gray-500">Nome</span>
+        <input type="text" class="grow" placeholder="Ex: João Silva" th:field="*{nome}" required />
+    </label>
+
+    <label class="input input-bordered flex items-center gap-2">
+        <span class="w-20 text-gray-500">CPF</span>
+        <input type="text" class="grow" placeholder="Ex: 123.456.789-00" th:field="*{cpf}" required />
+    </label>
+
+    <div class="flex flex-row mt-4 gap-2">
+        <a href="/clientes" class="btn btn-outline">Cancelar</a>
+        <button type="submit" class="btn btn-neutral">Salvar</button>
+
+        <button th:if="${cliente.id > 0}" type="button" class="btn btn-error btn-outline ml-auto"
+                onclick="document.getElementById('deleteModal').showModal()">Excluir</button>
+    </div>
+</form>
+
+<!-- Modal de Deleção de Cliente -->
+<dialog id="deleteModal" class="modal" th:if="${cliente.id > 0}">
+    <div class="modal-box">
+        <h3 class="text-lg font-bold">Confirmar Exclusão</h3>
+        <p class="py-4">Remover este cliente permanentemente?</p>
+        <div class="modal-action">
+            <form method="dialog"><button class="btn">Voltar</button></form>
+            <form th:action="@{/clientes/excluir/{id}(id=${cliente.id})}" method="post">
+                <button type="submit" class="btn btn-error">Sim, excluir</button>
+            </form>
+        </div>
+    </div>
+</dialog>
+</body>
+</html>
