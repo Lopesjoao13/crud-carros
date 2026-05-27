@@ -12,7 +12,7 @@
 <h1 class="text-3xl font-black mb-6 flex items-center gap-2">📊 Painel Estatístico</h1>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-    <!-- Card do Gráfico -->
+
     <div class="card bg-base-200 p-6 shadow-sm border border-base-300">
         <h2 class="card-title text-lg mb-4 text-neutral-content-dark">Faturamento Consolidado por Marca</h2>
         <div class="w-full h-80 flex items-center justify-center">
@@ -20,7 +20,6 @@
         </div>
     </div>
 
-    <!-- Card de Informações/Dicas de Negócio -->
     <div class="card bg-neutral text-neutral-content p-6 shadow-xl flex flex-col justify-between">
         <div>
             <h2 class="text-2xl font-bold mb-2 text-white">Insights Rápidos</h2>
@@ -38,7 +37,6 @@
 </div>
 
 <script th:inline="javascript">
-    // Leitura limpa dos dados injetados pelo Spring Controller
     const marcasCarros = /*[[${labels}]]*/ [];
     const faturamentoValores = /*[[${valores}]]*/ [];
 
